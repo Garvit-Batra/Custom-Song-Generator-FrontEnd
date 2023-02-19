@@ -5,7 +5,7 @@ export default function Button(props) {
     <div>
       <button
         type="button"
-        className="btn btn-primary my-2"
+        className="btn btn-light btn-sm my-2"
         onClick={props.handleClick}
         disabled={!props.formValid}
       >

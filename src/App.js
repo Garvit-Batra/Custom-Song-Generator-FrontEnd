@@ -38,13 +38,16 @@ function App() {
     setEmail(event.target.value);
   };
   const isFormDataValid = () => {
-    return inputFields.every(
-      (item) => item.link !== "" && item.st !== "" && item.et !== ""
+    return (
+      email !== "" &&
+      inputFields.every(
+        (item) => item.link !== "" && item.st !== "" && item.et !== ""
+      )
     );
   };
   useEffect(() => {
     setFormValid(isFormDataValid());
-  }, [inputFields]);
+  }, [inputFields, email]);
 
   const removeFields = (index) => {
     let data = [...inputFields];
@@ -57,7 +60,7 @@ function App() {
 
       <div>
         <form onSubmit={handleSubmit}>
-          <label>Email-ID</label>
+          <label className="text">Email-ID</label>
           <input
             type="email"
             className="form-control"
@@ -73,14 +76,14 @@ function App() {
                     <div className="col-sm-1 my-3">
                       <label
                         htmlFor="exampleFormControlInput1"
-                        className="form-label"
+                        className="text col-sm-2"
                       >
-                        Link {index + 1}
+                        Link
                       </label>
                     </div>
                     <div className="col-sm-1 my-1">
                       <Button
-                        title="Remove"
+                        title="✖"
                         handleClick={() => removeFields(index)}
                         formValid={true}
                       />
@@ -98,7 +101,7 @@ function App() {
                   />
                   <div className="row g-3">
                     <div className="col-sm-1">
-                      <label>Start Time</label>
+                      <label className="text">Start Time</label>
                       <input
                         className="form-control"
                         type="text"
@@ -110,7 +113,7 @@ function App() {
                       />
                     </div>
                     <div className="col-sm-1">
-                      <label>End Time</label>
+                      <label className="text">End Time</label>
                       <input
                         className="form-control"
                         type="text"
@@ -136,6 +139,9 @@ function App() {
           </div>
         </form>
       </div>
+      <div className="wave"></div>
+      <div className="wave"></div>
+      <div className="wave"></div>
     </div>
   );
 }
