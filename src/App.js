@@ -17,7 +17,7 @@ function App() {
     e.preventDefault();
     console.log(inputFields);
     axios
-      .post("http://localhost:3001/submitform", {
+      .post("https://csg-backend-8fx4.onrender.com/submitform", {
         inputFields,
         email,
       })
@@ -60,7 +60,9 @@ function App() {
 
       <div>
         <form onSubmit={handleSubmit}>
-          <label className="text">Email-ID</label>
+          <label className="text">
+            Email-ID (You'll receive your mp3 file on this email-ID)
+          </label>
           <input
             type="email"
             className="form-control"
