@@ -31,11 +31,46 @@ function App() {
 
   const handleFormChange = (index, event) => {
     let data = [...inputFields];
-    data[index][event.target.name] = event.target.value;
+    if(event.target.name==="link"){
+      const { value } = event.target;
+      const regex = /^https:\/\/www\.youtube\.com\/watch\?v=.+$/;
+      if(regex.test(value)){
+        data[index]["link"] = value;
+      }
+      else{
+        data[index]["link"] = "";
+      }
+    }
+    if(event.target.name==="st"){
+      const { value } = event.target;
+      const regex = /^[0-9]+$/;
+      if(regex.test(value)){
+        data[index]["st"] = value;
+      }
+      else{
+        data[index]["st"] = "";
+      }
+    }
+    if(event.target.name==="et"){
+      const { value } = event.target;
+      const regex = /^[0-9]+$/;
+      if(regex.test(value)){
+        data[index]["et"] = value;
+      }
+      else{
+        data[index]["et"] = "";
+      }
+    }
     setInputFields(data);
   };
   const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+    const { value } = event.target;
+    const regex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    if(regex.test(value)){
+      setEmail(event.target.value);
+    }else{
+      setEmail("");
+    }
   };
   const isFormDataValid = () => {
     return (
@@ -57,7 +92,6 @@ function App() {
   return (
     <div className="container">
       <Heading />
-
       <div>
         <form onSubmit={handleSubmit}>
           <label className="text">
@@ -91,7 +125,7 @@ function App() {
                       />
                     </div>
                   </div>
-
+                  <p className="text">Note: Please copy paste the youtube video link only</p>
                   <input
                     type="text"
                     className="form-control"
@@ -100,6 +134,7 @@ function App() {
                     onChange={(event) => handleFormChange(index, event)}
                     required
                     placeholder="Youtube Link"
+                    autoComplete="off"
                   />
                   <div className="row g-3">
                     <div className="col-sm-1">
@@ -112,6 +147,7 @@ function App() {
                         onChange={(event) => handleFormChange(index, event)}
                         required
                         placeholder="0"
+                        autoComplete="off"
                       />
                     </div>
                     <div className="col-sm-1">
@@ -124,6 +160,7 @@ function App() {
                         onChange={(event) => handleFormChange(index, event)}
                         required
                         placeholder="0"
+                        autoComplete="off"
                       />
                     </div>
                   </div>
